@@ -1,7 +1,7 @@
 // Import required modules
-
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const home = require("./routes/home");
 const genres = require("./routes/genres");
 const movies = require("./routes/movies");
@@ -13,6 +13,7 @@ const app = express();
 const port = process.env.PORT || 7000;
 
 // app.use
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", home);

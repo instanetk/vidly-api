@@ -27,4 +27,10 @@ router.get("/:id", async (req, res) => {
   res.send(movie);
 });
 
+router.delete("/:id", async (req, res) => {
+  const movie = await Movies.deleteOne({ _id: req.params.id });
+  if (!movie) return res.status(404).send("Movie does not exist");
+  res.send(movie);
+});
+
 module.exports = router;
