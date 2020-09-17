@@ -33,4 +33,25 @@ router.delete("/:id", async (req, res) => {
   res.send(movie);
 });
 
+router.post("/post", async (req, res) => {
+  const movie = new Movies(req.body);
+
+  try {
+    const result = await movie.save();
+    console.log(result);
+  } catch (ex) {
+    for (field in ex.errors) {
+      console.log(ex.errors[field].message);
+    }
+  }
+  res.send(movie);
+});
+
+router.put("/update/:id", async (req, res) => {
+  const movie = await Movies.updateOne({ _id: req.params.id }, req.body);
+  if (!movie) return;
+
+  res.send(movie);
+});
+
 module.exports = router;
